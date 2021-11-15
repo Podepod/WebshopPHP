@@ -40,7 +40,7 @@
                             <p>Uiterst <i>dan</i> geleverd</p>
                         </div>
                         <div class="col-2">
-                            <label for="aantal<?php echo($i); ?>">Aantal: </label>
+                            <label for="aantal<?php echo($i); ?>">Aantal pakskes zever: </label>
                             <!-- TODO max = stock van dat item -->
                             <input 
                                 class="form-control b-5 aantalItems" 

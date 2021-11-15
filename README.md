@@ -2,13 +2,13 @@
 
 ## Soorten
 
-- politieke zever (Een ware Belgische bestseller)
-- economische zever
-- Covid-19 zever
-- persoonlijke zever
-- culturele zever
-- wetenschappelijke zever
-- lokale zever
+- [x] politieke zever (Een ware Belgische bestseller)
+- [x] economische zever
+- [x] Covid-19 zever
+- [x] persoonlijke zever
+- [x] culturele zever
+- [ ] wetenschappelijke zever
+- [ ] lokale zever
 
 ## Groottes
 

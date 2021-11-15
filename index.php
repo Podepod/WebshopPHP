@@ -32,9 +32,9 @@
                     <div class="card">
                         <img src="./images/products/<?php echo($row['afbeeldingNaam']); ?>" class="card-img-top" alt="product afbeelding">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo($row['naam']); ?></h5>
+                            <h5 class="card-title"><?php echo($row['naam']); if ($row['voorraad'] <= 0) echo (' <span class="badge bg-danger">Uitverkocht</span>'); ?></h5>
                             <p class="card-text"><?php echo($row['beschrijving']); ?></p>
-                            <a href="#" class="btn btn-primary">Voeg toe aan winkelmandje</a>
+                            <a href="#" class="btn btn-primary <?php if($row['voorraad'] <= 0) echo('disabled'); ?>" role="button" <?php if($row['voorraad'] <= 0) echo('aria-disabled="true"'); ?>>Voeg toe aan winkelmandje</a>
                             <p class="card-text"><small class="text-muted">€ <?php echo($row['prijs']); ?></small></p>
                         </div>
                     </div>

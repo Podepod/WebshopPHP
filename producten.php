@@ -35,8 +35,8 @@
                             if ($row['verwijderd'] != 1){
                 ?>
                     <tr <?php if($row['voorraad'] == 0) echo('class="table-danger"'); ?>> <!-- enkel als voorraad 0 is: class="table-danger" --> 
+                        <td><?php echo($row['productID']); ?></td>
                         <td><?php echo($row['naam']); ?></td>
-                        <td class="text-truncate"><?php echo($row['beschrijving']); ?></td> 
                         <td>€ <?php echo($row['prijs']); ?></td> <!-- tot 2 na de komma (altijd) -->
                         <td><?php echo($row['voorraad']); ?></td>
                         <td><?php echo($row['afbeeldingNaam']); ?></td> <!-- afbeeldingen opgeslaan in ./images/products/ met deze naam dan -->
