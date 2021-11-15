@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php
@@ -10,24 +11,54 @@
     ?>
     <div class="container p-4">
         <?php include("./includes/alert.php"); ?>
-        <?php for ($i = 0; $i < 4; $i++){ ?>
-            <div class="row">
-                <?php for ($j = 0; $j < 3; $j++){ ?> 
-                    <div class="col-sm-4">
-                        <div class="card">
-                            <img src="./images/placeholder.jpg" class="card-img-top" alt="product image">
-                            <div class="card-body">
-                                <h5 class="card-title">Product title</h5>
-                                <p class="card-text">Product description</p>
-                                <a href="#" class="btn btn-primary">Voeg toe aan winkelmandje</a>
-                                <p class="card-text"><small class="text-muted">€ 330,30</small></p>
-                            </div>
+        
+        <?php 
+            include("./includes/dbConnection.php"); 
+            $sql = "SELECT * FROM producten";
+            $result = mysqli_query($conn, $sql);
+            $resultRows = mysqli_num_rows($result);
+            if ($resultRows > 0){
+                $i = 0;
+                
+                while($row = mysqli_fetch_assoc($result)){
+                    if ($row['verwijderd'] != 1){
+                        if ($i % 3 == 0){
+        ?>
+            <div class="row mb-3">
+        <?php                    
+                    }
+        ?>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <img src="./images/products/<?php echo($row['afbeeldingNaam']); ?>" class="card-img-top" alt="product afbeelding">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo($row['naam']); ?></h5>
+                            <p class="card-text"><?php echo($row['beschrijving']); ?></p>
+                            <a href="#" class="btn btn-primary">Voeg toe aan winkelmandje</a>
+                            <p class="card-text"><small class="text-muted">€ <?php echo($row['prijs']); ?></small></p>
                         </div>
                     </div>
-                <?php } ?>
+                </div>
+        <?php
+                        if (($i + 1) % 3 == 0){
+        ?>
             </div>
-            <br />
-        <?php } ?>
+        <?php
+                        }
+                        $i++;
+                    }
+                }
+
+                if ($i % 3 != 0){
+        ?>
+            </div>
+        <?php
+                }
+            } else {
+                //header('Location: ./index.php/?alert=Geen producten gevonden'); // TODO alert laten werken
+                echo("Geen producten gevonden.");
+            }    
+        ?>
     </div>
 </body>
 </html>

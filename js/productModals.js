@@ -16,13 +16,16 @@ productModal.addEventListener('show.bs.modal', function (event) {
 
     if (button.getAttribute('data-bs-formAction') == 'edit'){
         modalTitle.textContent = 'Wijzig product: ' + button.getAttribute('data-bs-productName');
+        productModal.querySelector('#productAanpassenSubmit').value = "Wijzigen";
     } else {
         modalTitle.textContent = 'Een nieuw product toevoegen';
+        productModal.querySelector('#productAanpassenSubmit').value = "Toevoegen";
     }
 
     productModal.querySelector('#formAction').value = button.getAttribute('data-bs-formAction');
     productModal.querySelector('#productID').value = button.getAttribute('data-bs-productID');
     productModal.querySelector('#productName').value = button.getAttribute('data-bs-productName');
+    productModal.querySelector('#productDescription').value = button.getAttribute('data-bs-productDescription');
     productModal.querySelector('#productPrice').value = button.getAttribute('data-bs-productPrice');
     productModal.querySelector('#productStock').value = button.getAttribute('data-bs-productStock');
     productModal.querySelector('#productImage').value = button.getAttribute('data-bs-productImage');

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- TODO redirect naar login pagina als nog niet ingelogd -->
