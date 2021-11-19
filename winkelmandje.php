@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    if (!isset($_SESSION['klandID'])){
+        header("Location: login.php?alert=Log je in om je winkelmandje te kunnen bekijken.");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- TODO redirect naar login pagina als nog niet ingelogd -->
@@ -72,7 +77,11 @@
                             <button class="btn btn-outline-danger mt-2">Verwijder</button>
                         </div>
                         <div class="col-2">
-                            <p class="text-end"><b>€ <span id="prijs<?php echo($winkelmandjeNr); ?>">330.30</span></b></p> <!-- totale prijs dit product berekenen met script -->
+                            <p class="text-end mb-0"><b>€ <span id="prijs<?php echo($winkelmandjeNr); ?>"><?php echo($row['prijs']); ?></span></b></p> <!-- totale prijs dit product berekenen met script -->
+                            <p class="text-end"><small>
+                                € <?php echo($row['prijs']); ?>
+                                <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Prijs per pakske zever."></i>
+                            </small></p>
                         </div>
                     </div>
                 </li>

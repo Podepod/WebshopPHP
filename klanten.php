@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    if (!isset($_SESSION['admin']) || $_SESSION['admin'] != 1){
+        header("Location: index.php?alert=Enkel de webshopbeheerder kan deze pagina bekijken.");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php
