@@ -1,6 +1,6 @@
 <?php 
     session_start(); 
-    if (!isset($_SESSION['klandID'])){
+    if (!isset($_SESSION['klantID'])){
         header("Location: login.php?alert=Log je in om je winkelmandje te kunnen bekijken.");
     }
 ?>
@@ -46,7 +46,7 @@
                     <!-- als er iets in het winkelmandje zit -->
                     <div class="row" id="winkelmandItem<?php echo($winkelmandjeNr); ?>">
                         <div class="col-3">
-                            <img class="rounded img-fluid" src="./images/placeholder.jpg" alt="productFoto">
+                            <img class="rounded img-fluid" src="./images/products/<?php echo($row['afbeeldingNaam']); ?>" alt="productFoto">
                         </div>
                         <div class="col-3">
                             <h3><?php echo($row['naam']); ?></h3>

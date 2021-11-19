@@ -9,7 +9,7 @@
     // TODO check user in database
 
     $_SESSION["klantID"] = 0;
-    $_SESSION["admin"] = 1;
+    $_SESSION["admin"] = 0;
     $_SESSION["naam"] = "Lode";
     $_SESSION["familieNaam"] = "Gilis";
     $_SESSION["email"] = "lode.gilis@gmail.com";

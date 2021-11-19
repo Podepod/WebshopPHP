@@ -8,7 +8,7 @@
 - [x] persoonlijke zever
 - [x] culturele zever
 - [ ] wetenschappelijke zever
-- [ ] lokale zever
+- [x] lokale zever
 
 ## Groottes
 
