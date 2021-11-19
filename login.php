@@ -18,7 +18,7 @@
             <div class="card-body">
                 <div class="form-floating mb-3"> <!-- TODO als email niet bestaat class+= "is-invalid" -->
                     <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
-                    <label for="floatingInput">Email address</label>
+                    <label for="floatingInput">E-mail adres</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
@@ -29,6 +29,7 @@
             <div class="card-footer">
                 <a href="?alert=Jammer, volgende keer beter! 😕" class="card-link">Wachtwoord vergeten?</a>
                 <a href="./signup.php" class="card-link">Ik heb nog geen account?</a>
+                <a href="./includes/login.php" class="card-link">Tijdelijke Session Login</a>
             </div>
         </form>
     </div>

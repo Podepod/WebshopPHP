@@ -7,6 +7,7 @@
         $productBeschrijving = htmlspecialchars($_POST['productDescription']);
         $productPrijs = htmlspecialchars($_POST['productPrice']);
         $productVoorraad = htmlspecialchars($_POST['productStock']);
+        //$productAfbeelding = htmlspecialchars($_POST['productImage']);
 
         $sql = "UPDATE producten SET naam=?, beschrijving=?, prijs=?, voorraad=? WHERE productID=?;";
         $stmt = mysqli_stmt_init($conn);

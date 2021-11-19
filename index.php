@@ -34,7 +34,31 @@
                         <div class="card-body">
                             <h5 class="card-title"><?php echo($row['naam']); if ($row['voorraad'] <= 0) echo (' <span class="badge bg-danger">Uitverkocht</span>'); ?></h5>
                             <p class="card-text"><?php echo($row['beschrijving']); ?></p>
-                            <a href="#" class="btn btn-primary <?php if($row['voorraad'] <= 0) echo('disabled'); ?>" role="button" <?php if($row['voorraad'] <= 0) echo('aria-disabled="true"'); ?>>Voeg toe aan winkelmandje</a>
+                            <form class="input-group mb-3" action="./includes/add_winkelmandje.php" method="POST">
+                                <input type="hidden" name="productID" value="<?php echo($row['productID']); ?>">
+                                <input type="hidden" name="productNaam" value="<?php echo($row['naam']); ?>">
+                                <input type="hidden" name="productPrijs" value="<?php echo($row['prijs']); ?>">
+
+                                <input 
+                                    type="number" 
+                                    class="form-control"
+                                    min="1"
+                                    max="<?php echo($row['voorraad']); ?>"
+                                    value="<?php if($row['voorraad'] <= 0) echo('0'); else echo('1'); ?>"
+                                    aria-describedby="button-toevoegen<?php echo($i); ?>"
+                                    name="winkelmand-item-hoeveelheid"
+                                >
+                                <button 
+                                    class="btn btn-primary <?php if($row['voorraad'] <= 0) echo('disabled'); ?>" 
+                                    type="submit" 
+                                    <?php if($row['voorraad'] <= 0) echo('aria-disabled="true"'); ?> 
+                                    id="button-toevoegen<?php echo($i); ?>"
+                                    name="winkelmand-item-toevoegen"
+                                    value=""
+                                >
+                                    Voeg toe aan winkelmandje
+                                </button>
+                            </form>
                             <p class="card-text"><small class="text-muted">€ <?php echo($row['prijs']); ?></small></p>
                         </div>
                     </div>

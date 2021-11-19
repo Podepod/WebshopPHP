@@ -10,53 +10,88 @@
           <a class="nav-link <?php if($page == "Shop") echo 'active'; ?>" aria-current="page" href="./index.php">Shop</a> 
         </li>
 
-        <!-- php if admin -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?php if ($page == "Producten" || $page == "Klanten") echo 'active'; ?>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Admin Panel
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="./producten.php"><i class="bi bi-view-list"></i> Producten</a></li>
-            <li><a class="dropdown-item" href="./klanten.php"><i class="bi bi-people"></i> Klanten</a></li>
-          </ul>
-        </li>
-        <!-- php end if -->
+        <?php
+          if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
+        ?>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <?php if ($page == "Producten" || $page == "Klanten") echo 'active'; ?>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Admin Panel
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="./producten.php"><i class="bi bi-view-list"></i> Producten</a></li>
+              <li><a class="dropdown-item" href="./klanten.php"><i class="bi bi-people"></i> Klanten</a></li>
+            </ul>
+          </li>
+        <?php
+          }
+        ?>
       </ul>
       <ul class="navbar-nav justify-content-end">
-        <!-- php if logged in -->
-        <li class="nav-item dropdown me-3">
-          <a class="nav-link dropdown-toggle <?php if ($page == "Winkelmandje") echo 'active'; ?> href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-cart"></i>
+        <?php
+          if (isset($_SESSION["klantID"])){
+        ?>
+          <li class="nav-item dropdown me-3">
+            <a class="nav-link dropdown-toggle <?php if ($page == "Winkelmandje") echo 'active'; ?> href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-cart"></i>
 
-            <!-- TODO enkel als er iets in winkelmandje zit, dit late zien -->
-            <span class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-primary">
-              99+
-              <span class="visually-hidden">Producten in winkelmandje</span>
-            </span>
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <!-- TODO fill with products in winkelmandje -->
-            <?php for ($i = 0; $i < 6; $i++) { ?>
-              <li>
+              <span class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-primary">
+                <?php
+                  $p = 0;
+                  foreach($_SESSION['winkelmandje'] as $product) {
+                    $p += $product['hoeveelheid'];
+                  }
+                  echo($p);
+                ?>
+                <span class="visually-hidden">Producten in winkelmandje</span>
+              </span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <!-- TODO fill with products in winkelmandje -->
+              <?php if (empty($_SESSION['winkelmandje'])) { ?>
                 <p class="dropdown-item mb-0">
-                  Product<?php echo($i); ?> 
-                  <small class="text-secondary">€330.30</small> <!-- prijs per item -->
-                  <span class="badge rounded-pill bg-primary float-end"><?php echo($i); ?></span>
-                </p>
-              </li>
-            <?php } ?>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="./winkelmandje.php"><i class="bi bi-cart"></i> Ga naar je winkelmandje</a></li>
-          </ul>
-        </li>
-      <!-- php end if -->
+                    Uw winkelmandje is momenteel leeg.
+                  </p>
+              <?php } else { foreach($_SESSION['winkelmandje'] as $product) { ?>
+                <li>
+                  <p class="dropdown-item mb-0">
+                    <?php echo($product['naam']) ?>
+                    <small class="text-secondary">€ <?php echo($product['prijs']) ?></small> <!-- prijs per item -->
+                    <span class="badge rounded-pill bg-primary float-end"><?php echo($product['hoeveelheid']); ?></span>
+                  </p>
+                </li>
+              <?php }} ?>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="./winkelmandje.php"><i class="bi bi-cart"></i> Ga naar je winkelmandje</a></li>
+            </ul>
+          </li>
+        <?php
+          }
+        ?>
       <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <?php if ($page == "Login" || $page == "Signup") echo 'active'; ?>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person"></i>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <!-- TODO Als nog niet logged in: ipv "Uitloggen" -> "Inloggen" -->
-            <li><a class="dropdown-item" href="./logout.php"><i class="bi bi-box-arrow-right"></i> Uitloggen</a></li>
+            <?php
+              if (isset($_SESSION["klantID"])){
+            ?>
+              <li><p class="dropdown-item mb-0">
+                <i class="bi bi-envelope"></i>
+                <?php echo($_SESSION["email"]); ?>
+              </p></li>
+              <li><p class="dropdown-item mb-0">
+                <i class="bi bi-person"></i>
+                <?php echo($_SESSION['naam'] . " " . $_SESSION['familieNaam']); ?>
+              </p></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="./includes/logout.php"><i class="bi bi-box-arrow-right"></i> Uitloggen</a></li>
+            <?php
+              } else {
+            ?>
+              <li><a class="dropdown-item" href="./login.php"><i class="bi bi-box-arrow-in-right"></i> Inloggen</a></li>
+            <?php
+              }
+            ?>
           </ul>
         </li>
       </ul>

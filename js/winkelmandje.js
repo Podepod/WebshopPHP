@@ -12,6 +12,13 @@ function berekenTotaal(){
     $("#totaalAantal").html(totaalAantal);
 }
 
+// tooltip voor vezendingskosten
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
+// prijzen aanpassen
 $().ready(() => {
     $(".aantalItems").each(function(){
         let textField = $(this).attr("data-bs-textField");
