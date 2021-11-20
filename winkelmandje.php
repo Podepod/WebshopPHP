@@ -6,7 +6,6 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<!-- TODO redirect naar login pagina als nog niet ingelogd -->
 <?php
     $page = "Winkelmandje";
     include("./includes/htmlHead.php");
@@ -17,7 +16,7 @@
     ?>
     <div class="container p-4">
         <?php include("./includes/alert.php"); ?>
-        <h1>Klant's winkelmandje</h1>
+        <h1><?php echo($_SESSION['naam']); ?>'s winkelmandje</h1>
 
         <!-- form invoegen -->
         <ul class="list-group list-group-flush">
@@ -74,7 +73,10 @@
                             >
                         
                             <!-- TODO knop onderaan row zetten -->
-                            <button class="btn btn-outline-danger mt-2">Verwijder</button>
+                            <form action="./includes/remove_winkelmandje.php" method="POST">
+                                <input type="hidden" name="productID" value="<?php echo($product['id']); ?>">
+                                <button type="submit" name="winkelmand-item-verwijderen" class="btn btn-outline-danger mt-2">Verwijder</button>
+                            </form>
                         </div>
                         <div class="col-2">
                             <p class="text-end mb-0"><b>€ <span id="prijs<?php echo($winkelmandjeNr); ?>"><?php echo($row['prijs']); ?></span></b></p> <!-- totale prijs dit product berekenen met script -->

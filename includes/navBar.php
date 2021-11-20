@@ -37,8 +37,10 @@
               <span class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-primary">
                 <?php
                   $p = 0;
+                  $t = 0;
                   foreach($_SESSION['winkelmandje'] as $product) {
                     $p += $product['hoeveelheid'];
+                    $t += $product['hoeveelheid'] * $product['prijs'];
                   }
                   echo($p);
                 ?>
@@ -49,18 +51,22 @@
               <!-- TODO fill with products in winkelmandje -->
               <?php if (empty($_SESSION['winkelmandje'])) { ?>
                 <p class="dropdown-item mb-0">
-                    Uw winkelmandje is momenteel leeg.
-                  </p>
+                  Uw winkelmandje is momenteel leeg.
+                </p>
               <?php } else { foreach($_SESSION['winkelmandje'] as $product) { ?>
                 <li>
                   <p class="dropdown-item mb-0">
+                    <span class="badge rounded-pill bg-primary"><?php echo($product['hoeveelheid']); ?></span>
                     <?php echo($product['naam']) ?>
                     <small class="text-secondary">€ <?php echo($product['prijs']) ?></small> <!-- prijs per item -->
-                    <span class="badge rounded-pill bg-primary float-end"><?php echo($product['hoeveelheid']); ?></span>
                   </p>
                 </li>
               <?php }} ?>
               <li><hr class="dropdown-divider"></li>
+              <li><p class="dropdown-item mb-0">
+                <span class="badge rounded-pill bg-primary">Totaal</span> 
+                <small class="text-secondary">€ <?php echo($t); ?></small>
+              <li><hr class="dropdown-divider"></li>              
               <li><a class="dropdown-item" href="./winkelmandje.php"><i class="bi bi-cart"></i> Ga naar je winkelmandje</a></li>
             </ul>
           </li>

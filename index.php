@@ -14,15 +14,14 @@
         
         <?php 
             include("./includes/dbConnection.php"); 
-            $sql = "SELECT * FROM producten";
+            $sql = "SELECT * FROM producten WHERE verwijderd=0";
             $result = mysqli_query($conn, $sql);
             $resultRows = mysqli_num_rows($result);
             if ($resultRows > 0){
                 $i = 0;
                 
                 while($row = mysqli_fetch_assoc($result)){
-                    if ($row['verwijderd'] != 1){
-                        if ($i % 3 == 0){
+                    if ($i % 3 == 0){
         ?>
             <div class="row mb-3">
         <?php                    
@@ -64,13 +63,12 @@
                     </div>
                 </div>
         <?php
-                        if (($i + 1) % 3 == 0){
+                    if (($i + 1) % 3 == 0){
         ?>
             </div>
         <?php
-                        }
-                        $i++;
                     }
+                    $i++;
                 }
 
                 if ($i % 3 != 0){
