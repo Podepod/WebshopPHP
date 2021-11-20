@@ -18,7 +18,7 @@
         <?php include("./includes/alert.php"); ?>
         <h1><?php echo($_SESSION['naam']); ?>'s winkelmandje</h1>
 
-        <!-- form invoegen -->
+        <form action="./includes/order.php" method="POST" id="winkelmandjeForm">
         <ul class="list-group list-group-flush">
             <?php if (empty($_SESSION['winkelmandje'])) { ?>
                 <li class="list-group-item">
@@ -26,8 +26,6 @@
                     <h5>Er zit niets in je winkelmandje.</h5>
                     <p><a href="./index.php">Hier</a> kan je verder winkelen</p>
                 </li>
-            <!-- TODO mogelijks dit weghalen -->
-            <input type="hidden" name="aantalVerschillendeItems" id="aantalVerschillendeItems" value="<?php echo($p); ?>">
             <?php 
                 } else { 
                     include('./includes/dbConnection.php');
@@ -42,7 +40,7 @@
                             $row = mysqli_fetch_assoc($result);
             ?>
                 <li class="list-group-item list-group-item-action">
-                    <!-- als er iets in het winkelmandje zit -->
+                    <input type="hidden" name="productID<?php echo($winkelmandjeNr); ?>" value="<?php echo($row['productID']); ?>">
                     <div class="row" id="winkelmandItem<?php echo($winkelmandjeNr); ?>">
                         <div class="col-3">
                             <img class="rounded img-fluid" src="./images/products/<?php echo($row['afbeeldingNaam']); ?>" alt="productFoto">
@@ -54,8 +52,7 @@
                             </p>
                         </div>
                         <div class="col-2">
-                            <!-- TODO altijd 2 weken later -->
-                            <p>Uiterst <i>dan</i> geleverd</p>
+                            <p>Uiterst morgen geleverd</p>
                         </div>
                         <div class="col-2">
                             <label for="aantal<?php echo($winkelmandjeNr); ?>">Aantal pakskes zever: </label>
@@ -87,8 +84,12 @@
                         </div>
                     </div>
                 </li>
-            <?php $winkelmandjeNr++; }}} ?>
+            <?php $winkelmandjeNr++; }} ?>
+                <input type="hidden" name="aantalVerschillendeItems" value="<?php echo($winkelmandjeNr); ?>">
+                <input type="hidden" name="klantID" value="<?php echo($_SESSION['klantID']); ?>">
+            <?php } ?>
         </ul>
+        </form>
         <?php if (!empty($_SESSION['winkelmandje'])) { ?>
             <div class="alert alert-warning text-reset">
                 <div class="row">
@@ -130,7 +131,7 @@
                 </div>
             </div>
             <!-- bestel button -->
-            <button class="btn btn-primary btn-lg float-end mb-5" type="submit">
+            <button class="btn btn-primary btn-lg float-end mb-5" type="submit" form="winkelmandjeForm">
                 Bestellen
             </button>
         <?php } ?>
