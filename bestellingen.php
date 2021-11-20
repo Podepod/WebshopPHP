@@ -2,6 +2,7 @@
     session_start(); 
     if (!isset($_SESSION['admin']) || $_SESSION['admin'] != 1){
         header("Location: index.php?alert=Enkel de webshopbeheerder kan deze pagina bekijken.");
+        exit();
     }
 ?>
 <!DOCTYPE html>
@@ -37,17 +38,53 @@
                         
                         while($row = mysqli_fetch_assoc($result)){
                 ?>
-                    <tr> <!-- enkel als voorraad 0 is: class="table-danger" --> 
+                    <tr>
                         <td><?php echo($row['bestellingID']); ?></td>
                         <td><?php echo($row['klantID']); ?></td>
-                        <td>€ <?php echo($row['bestellingTijd']); ?></td> <!-- tot 2 na de komma (altijd) -->
-                        <td><?php echo($row['betaald']); ?></td>
+                        <td><?php echo($row['bestellingTijd']); ?></td>
+                        <td><?php if ($row['betaald'] == 1) echo("Ja"); else echo("Nee"); ?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <table class="table table-light table-hover">
+                                <thead>
+                                    <th>productID</th>
+                                    <th>naam</th>
+                                    <th>prijs</th>
+                                    <th>hoeveelheid</th>
+                                    <th>totaalprijs</th>
+                                </thead>
+                                <tbody>
+                                    <!-- TODO tr per product in order -->
+                                    <tr>
+                                        <td>test</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                    </tr>
+                                    <tr>
+                                        <td>test</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                    </tr>
+                                    <tr>
+                                        <td>test</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
                     </tr>
                 <?php
                             $i++;
                         }
                     } else {
-                        //header('Location: ./index.php/?alert=Geen producten gevonden'); // TODO alert laten werken
                         echo("Geen bestellingen gevonden.");
                     }    
 

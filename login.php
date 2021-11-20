@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    if (isset($_SESSION['klantID'])){
+        header("Location: index.php?alert=Je bent al ingelogt.");
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php

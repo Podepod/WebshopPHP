@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     if (isset($_POST['aantalVerschillendeItems']) && $_POST['aantalVerschillendeItems'] > 0){
         include('./dbConnection.php');
 
@@ -22,14 +24,17 @@
 
         if(!mysqli_stmt_prepare($stmt, $sql)){
             header('Location: ../winkelmandje.php?alert=Prepare statement failed.');
+            exit();
         } else {
             mysqli_stmt_bind_param($stmt, "ss", $klantID, $bestelTijd);
             mysqli_stmt_execute($stmt);
             // producten aan bestelling linken
             /* bestellingID (vinden met tijd?), productID, hoeveelheid */
-            $sql = "SELECT bestellingID FROM bestellingen WHERE bestellingTijd=".$bestelTijd;
+            $sql = "SELECT bestellingID FROM bestellingen WHERE bestellingTijd='".$bestelTijd."'";
+            var_dump($sql);
             $result = mysqli_query($conn, $sql);
             $resultRows = mysqli_num_rows($result);
+            var_dump($resultRows);
             if ($resultRows == 1){
                 $row = mysqli_fetch_assoc($result);
                 $bestellingID = $row['bestellingID'];
@@ -40,16 +45,22 @@
 
                     if(!mysqli_stmt_prepare($stmt, $sql)){
                         header('Location: ../winkelmandje.php?alert=Prepare statement 2 failed.');
+                        exit();
                     } else {
                         mysqli_stmt_bind_param($stmt, "sss", $bestellingID, $productIDs[$i], $hoeveelheden[$i]);
                         mysqli_stmt_execute($stmt);
-
-                        header("Location: ../index.php?success=Uw bestelling werd succesvol geplaatst!");
                     }
                 }
+
+                $_SESSION["winkelmandje"] = array();
+
+                header("Location: ../index.php?success=Uw bestelling werd succesvol geplaatst!");
+                exit();
             }
-            
-            header("Location: ../index.php?alert=Er was een fout bij het plaatsen van uw bestelling.");
+            header("Location: ../winkelmandje.php?alert=Er was een fout bij het plaatsen van uw bestelling.");
+            exit();
         }
+    } else {
+        
     }
 ?>

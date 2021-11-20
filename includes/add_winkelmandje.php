@@ -28,12 +28,15 @@
 
                 array_push($_SESSION['winkelmandje'], $winkelmandItem);
                 header('Location: ../index.php');
+                exit();
             }
         } else {
             header('Location: ../index.php?alert=Deze actie kan enkel via de bijhorende knop uitgevoerd worden.');
+            exit();
         }
     } else {
         # TODO redirect naar login?
         header('Location: ../index.php?alert=Je kan enkel iets aan je winkelmandje toevoegen als je bent ingelogt.');
+        exit();
     }
 ?>

@@ -11,18 +11,20 @@
                 if ($_SESSION['winkelmandje'][$i]['id'] == $productID){
                     array_splice($_SESSION['winkelmandje'], $i, 1);
                     header('Location: ../winkelmandje.php?success=Het pakske zever werd uit je winkelmandje verwijderd.');
-                    $inWinkelmandje = true;
-                    break;
+                    exit();
                 }
             }
 
             if (!$inWinkelmandje){
                 header('Location: ../winkelmandje.php?alert=Dit pakske zever zit niet in het winkelmandje.');
+                exit();
             }
         } else {
             header('Location: ../winkelmandje.php?alert=Deze actie kan enkel via de bijhorende knop uitgevoerd worden.');
+            exit();
         }
     } else {
         header('Location: ../index.php?alert=Je kan enkel iets uit je winkelmandje verwijderen als je bent ingelogt.');
+        exit();
     }
 ?>

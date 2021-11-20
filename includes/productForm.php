@@ -14,10 +14,12 @@
 
         if(!mysqli_stmt_prepare($stmt, $sql)){
             header('Location: ../producten.php?alert=Prepare statement failed.');
+            exit();
         } else {
             mysqli_stmt_bind_param($stmt, "sssss", $productNaam, $productBeschrijving, $productPrijs, $productVoorraad, $productID);
             mysqli_stmt_execute($stmt);
             header("Location: ../producten.php?success='$productNaam' werd succesvol gewijzigd!");
+            exit();
         }
     } elseif (isset($_POST['productAanpassenSubmit']) && $_POST['productAanpassenSubmit'] == "Toevoegen"){
         include('./dbConnection.php');
@@ -32,12 +34,15 @@
 
         if(!mysqli_stmt_prepare($stmt, $sql)){
             header('Location: ../producten.php?alert=Prepare statement failed.');
+            exit();
         } else {
             mysqli_stmt_bind_param($stmt, "ssss", $productNaam, $productBeschrijving, $productPrijs, $productVoorraad);
             mysqli_stmt_execute($stmt);
             header("Location: ../producten.php?success='$productNaam' werd succesvol toegevoegd!");
+            exit();
         }
     } else {
         header('Location: ../producten.php?alert=Deze actie kan enkel via het admin paneel uitgevoerd worden.');
+        exit();
     }
 ?>

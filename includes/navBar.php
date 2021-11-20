@@ -20,6 +20,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="./producten.php"><i class="bi bi-view-list"></i> Producten</a></li>
               <li><a class="dropdown-item" href="./klanten.php"><i class="bi bi-people"></i> Klanten</a></li>
+              <li><a class="dropdown-item" href="./bestellingen.php"><i class="bi bi-box-seam"></i> Bestellingen</a></li>
             </ul>
           </li>
         <?php

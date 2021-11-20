@@ -2,6 +2,7 @@
     session_start(); 
     if (!isset($_SESSION['klantID'])){
         header("Location: login.php?alert=Log je in om je winkelmandje te kunnen bekijken.");
+        exit();
     }
 ?>
 <!DOCTYPE html>
