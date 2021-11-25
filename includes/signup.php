@@ -106,15 +106,14 @@
         mysqli_stmt_execute($stmt);
 
         echo(mysqli_insert_id($conn) . "</br>");
-        /*
+        
         $_SESSION["klantID"] = mysqli_insert_id($conn);
         $_SESSION["naam"] = $naam;
         $_SESSION["familieNaam"] = $familieNaam;
         $_SESSION["email"] = $email;
         $_SESSION["winkelmandje"] = array();
-        */
-
-        //header('Location: ../index.php?success=Klant account succesvol aangemaakt en ingelogd.');
+        
+        header('Location: ../index.php?success=Klant account succesvol aangemaakt en ingelogd.');
         exit();
     }
 ?>

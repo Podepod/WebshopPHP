@@ -11,6 +11,29 @@
 - [x] bestellingen klantNaam weergeven ipv klant ID --> miss ook adres weergeven?
 - [ ] onnodige files verwijderen
 - [ ] 'alert=Prepare statement3 failed.' veranderen naar iets klantvriendelijker
+- [ ] sql user veranderen naar de juiste!!!
+- [ ] nieuwe ERD maken
+
+## Webuser account
+
+```
+email    : webuser@zeverinpakskes.be
+password : Lab2021
+```
+
+## Andere accounts
+
+gewone klant account
+```
+email    : lode.gilis@lode.be
+password : lode
+```
+
+andere admin account
+```
+email    : admin@zeverinpakskes.be
+password : eenGoedWachtwoord
+```
 
 ## Soorten
 
