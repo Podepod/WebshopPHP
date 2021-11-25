@@ -22,67 +22,85 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>KlantID</th>
-                    <th>bestellingTijd</th>
-                    <th>betaald</th>
+                    <th>Klant</th>
+                    <th>Bezorgadres</th>
+                    <th>Bestelling Tijd</th>
+                    <th>Totaal</th>
+                    <th>Betaald?</th>
                 </tr>
             </thead>
             <tbody>
                 <?php 
                     include("./includes/dbConnection.php"); 
-                    $sql = "SELECT * FROM bestellingen";
+                    $sql = "
+                        SELECT b.bestellingID, CONCAT(k.naam, ' ', k.familieNaam) as 'klant', CONCAT(a.straatnaam, ' ', a.straatnummer, ', ', a.postcode, ' ', a.dorpsnaam) as 'bezorgadres', b.bestellingTijd, sum(p.prijs * bp.hoeveelheid) as 'totaal', b.betaald
+                        FROM bestellingen b
+                            INNER JOIN bestellingproducten bp
+                            ON b.bestellingID = bp.bestellingID
+                                INNER JOIN producten p
+                                ON bp.productID = p.productID
+                            INNER JOIN klanten k
+                            ON b.klantID = k.klantID
+                                INNER JOIN adressen a
+                                ON k.adresID = a.adresID
+                        GROUP BY b.bestellingID
+                        ORDER BY b.bestellingTijd DESC;
+                    ";
                     $result = mysqli_query($conn, $sql);
                     $resultRows = mysqli_num_rows($result);
                     if ($resultRows > 0){
-                        $i = 0;
-                        
                         while($row = mysqli_fetch_assoc($result)){
                 ?>
                     <tr>
                         <td><?php echo($row['bestellingID']); ?></td>
-                        <td><?php echo($row['klantID']); ?></td>
+                        <td><?php echo($row['klant']); ?></td>
+                        <td><?php echo($row['bezorgadres']); ?></td>
                         <td><?php echo($row['bestellingTijd']); ?></td>
+                        <td>€ <?php echo($row['totaal']); ?></td>
                         <td><?php if ($row['betaald'] == 1) echo("Ja"); else echo("Nee"); ?></td>
                     </tr>
                     <tr>
-                        <td colspan="4">
+                        <td colspan="6">
                             <table class="table table-light table-hover">
                                 <thead>
-                                    <th>productID</th>
-                                    <th>naam</th>
-                                    <th>prijs</th>
-                                    <th>hoeveelheid</th>
-                                    <th>totaalprijs</th>
+                                    <th>ProductID</th>
+                                    <th>Naam</th>
+                                    <th>Prijs / pakske zever</th>
+                                    <th>Hoeveelheid</th>
+                                    <th>Totaal</th>
                                 </thead>
                                 <tbody>
-                                    <!-- TODO tr per product in order -->
+                                    <?php 
+                                        include("./includes/dbConnection.php"); 
+                                        $sql2 = "
+                                            SELECT p.productID, p.naam, p.prijs, bp.hoeveelheid, p.prijs * bp.hoeveelheid as 'totaal'
+                                            FROM bestellingproducten bp
+                                                INNER JOIN producten p
+                                                ON bp.productID = p.productID
+                                            WHERE bp.bestellingID = " . $row['bestellingID'] . "
+                                            ORDER BY totaal DESC;
+                                        ";
+                                        $result2 = mysqli_query($conn, $sql2);
+                                        $resultRows2 = mysqli_num_rows($result2);
+                                        if ($resultRows2 > 0){
+                                            while($row2 = mysqli_fetch_assoc($result2)){
+                                    ?>
                                     <tr>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
+                                        <td><?php echo($row2['productID']); ?></td>
+                                        <td><?php echo($row2['naam']); ?></td>
+                                        <td><?php echo($row2['prijs']); ?></td>
+                                        <td><?php echo($row2['hoeveelheid']); ?></td>
+                                        <td><?php echo($row2['totaal']); ?></td>
                                     </tr>
-                                    <tr>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                    </tr>
-                                    <tr>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                    </tr>
+                                    <?php
+                                            }
+                                        }
+                                    ?>
                                 </tbody>
                             </table>
                         </td>
                     </tr>
                 <?php
-                            $i++;
                         }
                     } else {
                         echo("Geen bestellingen gevonden.");
@@ -92,51 +110,5 @@
             </tbody>
         </table>
     </div>
-
-    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="productModalTitle"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="productFormModal" action="./includes/productForm.php" method="post">
-                        <input type="hidden" name="formAction" id="formAction">
-                        <div class="mb-3">
-                            <label for="productID" class="col-form-label">ProductID:</label>
-                            <input type="number" class="form-control" id="productID" name="productID" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productName" class="col-form-label">Productnaam:</label>
-                            <input type="text" class="form-control" id="productName" name="productName">
-                        </div>
-                        <div class="mb-3">
-                            <label for="productName" class="col-form-label">Product beschrijving:</label>
-                            <textarea class="form-control" name="productDescription" id="productDescription" name="productDescription" rows="5"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productPrice" class="col-form-label">Prijs:</label>
-                            <input type="number" class="form-control" id="productPrice" name="productPrice" step="0.01">
-                        </div>
-                        <div class="mb-3">
-                            <label for="productStock" class="col-form-label">Voorraad:</label>
-                            <input type="number" class="form-control" id="productStock" name="productStock">
-                        </div>
-                        <div class="mb-3">
-                            <label for="productImage" class="col-form-label">Afbeelding:</label>
-                            <input type="text" class="form-control" id="productImage" name="productImage" readonly>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <input id="productAanpassenSubmit" name="productAanpassenSubmit" type="submit" class="btn btn-primary" form="productFormModal">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal script -->
-    <script src="./js/ProductModals.js" type="application/javascript"></script>
 </body>
 </html>

@@ -1,5 +1,17 @@
 # Zever in pakskes
 
+## TODO
+
+- [x] login / signup
+- [x] bestellingen pagina sql
+- [ ] search --> AJAX
+- [ ] js form check [bootstrap validation](https://getbootstrap.com/docs/5.0/forms/validation/)
+- [ ] error handling?
+- [ ] bestelling moet ook stock verminderen
+- [x] bestellingen klantNaam weergeven ipv klant ID --> miss ook adres weergeven?
+- [ ] onnodige files verwijderen
+- [ ] 'alert=Prepare statement3 failed.' veranderen naar iets klantvriendelijker
+
 ## Soorten
 
 - [x] politieke zever (Een ware Belgische bestseller)
@@ -19,6 +31,8 @@
 
 
 ## Commands gebruikt voor SQL aan te make (ERD aanpassen)
+
+eerst in mysql console geraken door de command `mysql -u root -p`
 
 ```sql
 CREATE DATABASE ZeverInPakskesDB;
@@ -81,5 +95,59 @@ INSERT INTO Producten (naam, beschrijving, voorraad, prijs) VALUES
 ('Corona Zever', 'De afgelopen tijd is dit zeer hard van toepassing', '16', '199.99'),
 ('Economische Zever', 'Allemaal zever over geld en toestanden', '6', '250'),
 ('Culturele Zever', 'Deze zever kan een beetje controversieel zijn', '11', '100');
+```
 
+bestelling pagina sql queries
+
+```sql
+SELECT b.bestellingID, CONCAT(k.naam, ' ', k.familieNaam) as 'klant', CONCAT(a.straatnaam, ' ', a.straatnummer, ', ', a.postcode, ' ', a.dorpsnaam) as 'bezorgadres', b.bestellingTijd, sum(p.prijs * bp.hoeveelheid) as 'totaal', b.betaald
+FROM bestellingen b
+    INNER JOIN bestellingproducten bp
+    ON b.bestellingID = bp.bestellingID
+        INNER JOIN producten p
+        ON bp.productID = p.productID
+    INNER JOIN klanten k
+    ON b.klantID = k.klantID
+        INNER JOIN adressen a
+        ON k.adresID = a.adresID
+GROUP BY b.bestellingID
+ORDER BY b.bestellingTijd DESC;
+
+SELECT p.productID, p.naam, p.prijs, bp.hoeveelheid, p.prijs * bp.hoeveelheid as 'totaal'
+FROM bestellingproducten bp
+    INNER JOIN producten p
+    ON bp.productID = p.productID
+WHERE bp.bestellingID = 11
+ORDER BY totaal DESC
+```
+
+accounts aanmaken (test user, geen check voor bestaande dingen nodig)
+
+```sql
+INSERT INTO Klanten (naam, familieNaam, email, password, geboorteDatum, admin, adresID) VALUES
+('Test1', 'TesterFamilie', 'test.test@test.be', '$2y$10$2AYbBRu8vO9AoAWJELcNQuAEoP/INrK20ZEEiztXmNkuA7vK1pBw2', '2002-07-12', '1', '1');
+
+INSERT INTO Adressen (straatnaam, postcode, dorpsnaam, straatnummer) VALUES
+('TestStraat', '1234', 'TestDorp', '1A');
+
+UPDATE klanten SET admin=1 WHERE klantID=1;
+
+
+SELECT k.klantID, CONCAT(k.naam, ' ', k.familieNaam) as 'volledigeNaam', k.email, CONCAT(a.straatnaam, ' ', a.straatnummer, ', ', a.postcode, ' ', a.dorpsnaam) as 'adres', k.geboorteDatum, k.registratieTijd, k.admin FROM klanten k
+    INNER JOIN adressen a
+    ON k.adresID = a.adresID
+WHERE k.verwijderd = '0'
+```
+
+login dingen checken
+
+```sql
+SELECT * FROM Klanten
+WHERE email='test.test@test.be'
+```
+
+signup
+```sql
+SELECT adresID FROM adressen
+WHERE straatnaam='TestStraat' AND postcode='1234' AND dorpsnaam='testdorp' AND straatnummer='1A';
 ```

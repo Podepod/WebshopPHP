@@ -115,7 +115,7 @@
                         
                         while($row = mysqli_fetch_assoc($result)){
                 ?>
-                    <tr <?php if($row['voorraad'] == 0) echo('class="table-danger"'); ?>> <!-- enkel als voorraad 0 is: class="table-danger" --> 
+                    <tr class="text-secondary<?php if($row['voorraad'] == 0) echo('table-danger'); ?>"> <!-- enkel als voorraad 0 is: class="table-danger" --> 
                         <td><?php echo($row['productID']); ?></td>
                         <td><?php echo($row['naam']); ?></td>
                         <td>€ <?php echo($row['prijs']); ?></td> <!-- tot 2 na de komma (altijd) -->

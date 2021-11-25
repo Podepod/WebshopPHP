@@ -1,4 +1,10 @@
 <?php
+    session_start(); 
+    if (!isset($_SESSION['admin']) || $_SESSION['admin'] != '1'){
+        header("Location: ./index.php?alert=Je moet ingelogd zijn met een administrator account om deze actie te voltooien.");
+        exit();
+    }
+
     if (isset($_POST['productVerwijderen']) && $_POST['productVerwijderen'] == "Verwijderen"){
         include('./dbConnection.php');
         
