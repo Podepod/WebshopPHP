@@ -17,7 +17,7 @@
     ?>
     <div class="container p-4">
         <?php include("./includes/alert.php"); ?>
-        <form class="card mx-auto loginForm" action="./includes/signup.php" method="POST">
+        <form class="card mx-auto loginForm" action="./includes/signup.php" method="POST" onsubmit="return checkForm(this)">
             <div class="card-header">
                 <h4>Signup</h4>
             </div>
@@ -71,5 +71,6 @@
             </div>
         </form>
     </div>
+    <script src="./js/formCheck.js"></script>
 </body>
 </html>

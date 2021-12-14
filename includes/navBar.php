@@ -48,7 +48,7 @@
                 <span class="visually-hidden">Producten in winkelmandje</span>
               </span>
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <!-- TODO fill with products in winkelmandje -->
               <?php if (empty($_SESSION['winkelmandje'])) { ?>
                 <p class="dropdown-item mb-0">
@@ -78,7 +78,7 @@
           <a class="nav-link dropdown-toggle <?php if ($page == "Login" || $page == "Signup") echo 'active'; ?>" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person"></i>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <?php
               if (isset($_SESSION["klantID"])){
             ?>
@@ -102,10 +102,7 @@
           </ul>
         </li>
       </ul>
-      <form class="d-flex"> <!-- TODO miss dees int midden zetten zoals bol.com -->
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      
     </div>
   </div>
 </nav>
