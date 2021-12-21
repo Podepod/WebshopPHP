@@ -80,6 +80,6 @@
 <?php
         }
     } else {
-        echo("Deze zever verkopen wij niet.");
+        echo("Deze zever verkopen zelfs wij niet.");
     }    
 ?>

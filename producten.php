@@ -190,7 +190,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="productImage" class="col-form-label">Afbeelding:</label>
-                            <input type="text" class="form-control" id="productImage" name="productImage" readonly>
+                            <input type="text" class="form-control" id="productImage" name="productImage">
                         </div>
                     </form>
                 </div>

@@ -13,16 +13,16 @@
         $productBeschrijving = htmlspecialchars($_POST['productDescription']);
         $productPrijs = htmlspecialchars($_POST['productPrice']);
         $productVoorraad = htmlspecialchars($_POST['productStock']);
-        //$productAfbeelding = htmlspecialchars($_POST['productImage']);
+        $productAfbeelding = htmlspecialchars($_POST['productImage']);
 
-        $sql = "UPDATE producten SET naam=?, beschrijving=?, prijs=?, voorraad=? WHERE productID=?;";
+        $sql = "UPDATE producten SET naam=?, beschrijving=?, prijs=?, voorraad=?, afbeeldingNaam=? WHERE productID=?;";
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt, $sql)){
             header('Location: ../producten.php?alert=Prepare statement failed.');
             exit();
         } else {
-            mysqli_stmt_bind_param($stmt, "sssss", $productNaam, $productBeschrijving, $productPrijs, $productVoorraad, $productID);
+            mysqli_stmt_bind_param($stmt, "ssssss", $productNaam, $productBeschrijving, $productPrijs, $productVoorraad, $productAfbeelding, $productID);
             mysqli_stmt_execute($stmt);
             header("Location: ../producten.php?success='$productNaam' werd succesvol gewijzigd!");
             exit();
@@ -34,15 +34,16 @@
         $productBeschrijving = htmlspecialchars($_POST['productDescription']);
         $productPrijs = htmlspecialchars($_POST['productPrice']);
         $productVoorraad = htmlspecialchars($_POST['productStock']);
+        $productAfbeelding = htmlspecialchars($_POST['productImage']);
 
-        $sql = "INSERT INTO producten (naam, beschrijving, prijs, voorraad) VALUES (?, ?, ?, ?);";
+        $sql = "INSERT INTO producten (naam, beschrijving, prijs, voorraad, afbeeldingNaam) VALUES (?, ?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt, $sql)){
             header('Location: ../producten.php?alert=Prepare statement failed.');
             exit();
         } else {
-            mysqli_stmt_bind_param($stmt, "ssss", $productNaam, $productBeschrijving, $productPrijs, $productVoorraad);
+            mysqli_stmt_bind_param($stmt, "sssss", $productNaam, $productBeschrijving, $productPrijs, $productVoorraad, $productAfbeelding);
             mysqli_stmt_execute($stmt);
             header("Location: ../producten.php?success='$productNaam' werd succesvol toegevoegd!");
             exit();
