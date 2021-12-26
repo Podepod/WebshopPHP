@@ -31,10 +31,10 @@
             // producten aan bestelling linken
             /* bestellingID (vinden met tijd?), productID, hoeveelheid */
             $sql = "SELECT bestellingID FROM bestellingen WHERE bestellingTijd='".$bestelTijd."'";
-            var_dump($sql);
+            //var_dump($sql);
             $result = mysqli_query($conn, $sql);
             $resultRows = mysqli_num_rows($result);
-            var_dump($resultRows);
+            //var_dump($resultRows);
             if ($resultRows == 1){
                 $row = mysqli_fetch_assoc($result);
                 $bestellingID = $row['bestellingID'];
@@ -50,6 +50,34 @@
                         mysqli_stmt_bind_param($stmt, "sss", $bestellingID, $productIDs[$i], $hoeveelheden[$i]);
                         mysqli_stmt_execute($stmt);
                     }
+
+                    // "SELECT voorraad FROM producten WHERE productID=?;"
+                    $sql = "SELECT voorraad FROM producten WHERE productID=?;";
+                    $stmt = mysqli_stmt_init($conn);
+
+                    if(!mysqli_stmt_prepare($stmt, $sql)){
+                        header('Location: ../winkelmandje.php?alert=Prepare statement 3 failed.');
+                        exit();
+                    } else {
+                        mysqli_stmt_bind_param($stmt, "s", $productIDs[$i]);
+                        mysqli_stmt_execute($stmt);
+
+                        $result = mysqli_stmt_get_result($stmt);
+                        $row = mysqli_fetch_assoc($result);
+                        $nieuweVoorraad = $row["voorraad"] - $hoeveelheden[$i];
+                    }
+
+                    // "UPDATE producten SET voorraad=? WHERE productID=?;"
+                    $sql = "UPDATE producten SET voorraad=? WHERE productID=?;";
+                    $stmt = mysqli_stmt_init($conn);
+
+                    if(!mysqli_stmt_prepare($stmt, $sql)){
+                        header('Location: ../winkelmandje.php?alert=Prepare statement 4 failed.');
+                        exit();
+                    } else {
+                        mysqli_stmt_bind_param($stmt, "ss", $nieuweVoorraad, $productIDs[$i]);
+                        mysqli_stmt_execute($stmt);
+                    }
                 }
 
                 $_SESSION["winkelmandje"] = array();
@@ -61,6 +89,7 @@
             exit();
         }
     } else {
-        
+        header('Location: ../winkelmandje.php?alert=Er zitten geen items in dit winkelmandje.');
+        exit();
     }
 ?>

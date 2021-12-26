@@ -17,51 +17,52 @@
     ?>
     <div class="container p-4">
         <?php include("./includes/alert.php"); ?>
-        <form class="card mx-auto loginForm" action="./includes/signup.php" method="POST" onsubmit="return checkForm(this)">
+        <!-- action="./includes/signup.php" -->
+        <form class="card mx-auto loginForm" action="" method="POST" onsubmit="return checkForm(this)" novalidate >
             <div class="card-header">
                 <h4>Signup</h4>
             </div>
             <div class="card-body">
                 <div class="form-floating mb-3">
-                    <input type="text" name="naam" class="form-control" id="naam" placeholder="Lode" required>
+                    <input type="text" name="naam" class="form-control" id="naam" placeholder="">
                     <label for="naam">Naam</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" name="familieNaam" class="form-control" id="familieNaam" placeholder="Gilis" required>
+                    <input type="text" name="familieNaam" class="form-control" id="familieNaam" placeholder="">
                     <label for="familieNaam">Familienaam</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="date" name="geboorte" class="form-control" id="geboorte" placeholder="06/11/2000" required>
+                    <input type="date" name="geboorte" class="form-control" id="geboorte" placeholder="">
                     <label for="geboorte">Geboortedatum</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="">
                     <label for="email">E-mail adres</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="">
                     <label for="password">Password</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="password" name="password2" class="form-control" id="password2" placeholder="Herhaal Password" required>
+                    <input type="password" name="password2" class="form-control" id="password2" placeholder="">
                     <label for="password2">Herhaal Password</label>
                 </div>
                 <div class="row m-0 mb-3">
                     <div class="form-floating p-0 col-8">
-                        <input type="text" name="straat" class="form-control" id="straat" placeholder="123 Hoofdstraat" required>
+                        <input type="text" name="straat" class="form-control" id="straat" placeholder="">
                         <label for="straat">Straatnaam</label>
                     </div>
                     <div class="form-floating p-0 col-4">
-                        <input type="text" name="nummer" class="form-control" id="nummer" placeholder="20A" required>
+                        <input type="text" name="nummer" class="form-control" id="nummer" placeholder="">
                         <label for="nummer">Nummer</label>
                     </div>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" name="stad" class="form-control" id="floatingInput" placeholder="Brussel" required>
+                    <input type="text" name="stad" class="form-control" id="floatingInput" placeholder="">
                     <label for="floatingInput">Stad</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="number" name="postcode" class="form-control" id="floatingInput" placeholder="1000" required>
+                    <input type="number" name="postcode" class="form-control" id="floatingInput" placeholder="">
                     <label for="floatingInput">Postcode</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Sign up</button>

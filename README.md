@@ -7,7 +7,7 @@
 - [x] search --> AJAX
 - [ ] js form check [bootstrap validation](https://getbootstrap.com/docs/5.0/forms/validation/)
 - [ ] error handling? 1 try en catch gebruiken
-- [ ] bestelling moet ook stock verminderen
+- [x] bestelling moet ook stock verminderen
 - [x] bestellingen klantNaam weergeven ipv klant ID --> miss ook adres weergeven?
 - [ ] onnodige files verwijderen
 - [ ] 'alert=Prepare statement3 failed.' veranderen naar iets klantvriendelijker
