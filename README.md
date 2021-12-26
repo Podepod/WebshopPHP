@@ -13,6 +13,7 @@
 - [ ] 'alert=Prepare statement3 failed.' veranderen naar iets klantvriendelijker
 - [ ] sql user veranderen naar de juiste!!!
 - [ ] nieuwe ERD maken
+- [ ] alles een beetje mooier maken
 
 ## Webuser account
 
@@ -21,37 +22,10 @@ email    : webuser@zeverinpakskes.be
 password : Lab2021
 ```
 
-## Andere accounts
+## oeps
 
-gewone klant account
-```
-email    : lode.gilis@lode.be
-password : lode
-```
-
-andere admin account
-```
-email    : admin@zeverinpakskes.be
-password : eenGoedWachtwoord
-```
-
-## Soorten
-
-- [x] politieke zever (Een ware Belgische bestseller)
-- [x] economische zever
-- [x] Covid-19 zever
-- [x] persoonlijke zever
-- [x] culturele zever
-- [ ] wetenschappelijke zever
-- [x] lokale zever
-
-## Groottes
-
-- kg?
-- L?
-- klein/groot
-- palletten?
-
+- je orders heeft geen enkel attribuut. Ik neem aan dat je op zijn minst een PK orderID of zoiets toevoegt.
+- nu kan je in een order een bepaald product maar 1 keer plaatsen, wat als ik hetzelfde product meer dan 1 keer wil bestellen in 1 order? 
 
 ## Commands gebruikt voor SQL aan te make (ERD aanpassen)
 

@@ -34,7 +34,7 @@
         } else {
             mysqli_stmt_bind_param($stmt, "ss", $to, htmlspecialchars($_POST['klantID']));
             mysqli_stmt_execute($stmt);
-            header("Location: ../klanten.php?success=Klant '$klantID' werd succesvol aangepast!");
+            header("Location: ../klanten.php?success=Klant ". htmlspecialchars($_POST['klantID']) ." werd succesvol aangepast!");
             exit();
         }
 
