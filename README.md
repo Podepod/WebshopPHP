@@ -14,6 +14,7 @@
 - [ ] sql user veranderen naar de juiste!!!
 - [ ] nieuwe ERD maken
 - [ ] alles een beetje mooier maken
+- [ ] htmlHead terug op online zetten
 
 ## Webuser account
 
