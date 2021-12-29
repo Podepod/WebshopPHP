@@ -17,8 +17,13 @@
     ?>
     <div class="container p-4">
         <?php include("./includes/alert.php"); ?>
+
+        <div id="formAlert">
+            
+        </div>
+
         <!-- action="./includes/signup.php" -->
-        <form class="card mx-auto loginForm" action="" method="POST" onsubmit="return checkForm(this)" novalidate >
+        <form class="card mx-auto loginForm" action="./includes/signup.php" method="POST" onsubmit="return checkSignin(this)" novalidate >
             <div class="card-header">
                 <h4>Signup</h4>
             </div>
@@ -58,11 +63,11 @@
                     </div>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" name="stad" class="form-control" id="floatingInput" placeholder="">
+                    <input type="text" name="stad" class="form-control" id="stad" placeholder="">
                     <label for="floatingInput">Stad</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="number" name="postcode" class="form-control" id="floatingInput" placeholder="">
+                    <input type="number" name="postcode" class="form-control" id="postcode" placeholder="">
                     <label for="floatingInput">Postcode</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Sign up</button>

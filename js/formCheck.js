@@ -1,55 +1,60 @@
-function checkForm(form){
-    var elements = form.querySelectorAll("input")
-    var allesIngevuld = true;
+function formAlert(){
+    var alertDiv = document.getElementById("formAlert");
+    alertDiv.innerHTML = `
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <strong>Vul het formulier juist in.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `;
+}
 
-    /*
-        text
-        number
-        date
-        password
-    */
-
-    for (var i = 0, element; element = elements[i++];){
-        console.log(element);
-        console.log(element.name);
-        console.log(element.value);
-        console.log(element.type);
-        console.log("========================================================");
-
-        // check of er al een .valid of .invalid staat
-
-
-        if (element.value == "" || element.value == null) {
-            element.classList.add("invalid");
-            continue;
-        }
-
-        switch(element.type){
-            case "text":
-                break;
-            case "number":
-                console.log("Numberding");
-                break;
-            case "date":
-                console.log("DateDing");
-                break;
-            case "password":
-                console.log("Passwordding");
-                break;
-            default:
-                console.log("DefaultDing");
-        }
-    }
-    
-    // geef de form een .was-validated als die dat nog niet heeft
-    form.classList.add("was-validated");
-    return false
+function isDate(date) {
+    return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
 }
 
 function checkSignin(form){
-    if (!checkForm(form)) return false;
+    var juist = true;
 
+    var naam = document.getElementById("naam").value;
+    var familieNaam = document.getElementById("familieNaam").value;
+    var geboortedatum = document.getElementById("geboorte").value;
+    var email = document.getElementById("email").value;
+    var password1 = document.getElementById("password").value;
+    var password2 = document.getElementById("password2").value;
+    var straat = document.getElementById("straat").value;
+    var nummer = document.getElementById("nummer").value;
+    var stad = document.getElementById("stad").value;
+    var postcode = document.getElementById("postcode").value;
 
+    // check of namen lang genoeg zijn
+    if (naam.length < 2 || familieNaam.length < 2) juist = false;
 
+    // check of de geboortedatum een geldige datum
+    if (geboortedatum.length == null || !isDate(geboortedatum)) juist = false;
+
+    // check of email een geldige email is
+    if (!(/^[0-9,a-z]+(.[0-9,a-z]+)+@[a-z]+\.[a-z][a-z][a-z]?$/.test(email))) juist = false;
+
+    // check of passwoorden overeen komen
+    //if (password1.length < 2 || password2.length < 2 ||password1 != password2) juist = false;
+
+    // check of de straatnaam lang genoeg is
+    if (straat.length < 2) juist = false;
+
+    // check of de straatnummer een nummer met dan mogelijks een letter is
+    if (!(/^[0-9]+[a-z]?/i.test(nummer))) juist = false;
+
+    
+    // check of de stad lang genoeg is
+    if (stad.length < 2) juist = false;
+
+    // check of de postcode een geldige postcode is
+    if (!(/^[0-9][0-9][0-9][0-9]$/.test(postcode))) juist = false;
+    
+
+    if (!juist){
+        formAlert();
+    }
+    return juist;
 }
-

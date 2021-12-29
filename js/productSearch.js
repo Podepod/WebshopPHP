@@ -22,5 +22,3 @@ $().ready(() => {
     search();
     $("#search").keyup(search);
 })
-
-// stop me zeveren dat bestaat niet

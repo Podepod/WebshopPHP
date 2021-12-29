@@ -5,16 +5,13 @@
 - [x] login / signup
 - [x] bestellingen pagina sql
 - [x] search --> AJAX
-- [ ] js form check [bootstrap validation](https://getbootstrap.com/docs/5.0/forms/validation/)
-- [ ] error handling? 1 try en catch gebruiken
+- [x] js form check
 - [x] bestelling moet ook stock verminderen
 - [x] bestellingen klantNaam weergeven ipv klant ID --> miss ook adres weergeven?
-- [ ] onnodige files verwijderen
-- [ ] 'alert=Prepare statement3 failed.' veranderen naar iets klantvriendelijker
-- [ ] sql user veranderen naar de juiste!!!
-- [ ] nieuwe ERD maken
-- [ ] alles een beetje mooier maken
-- [ ] htmlHead terug op online zetten
+- [x] onnodige files verwijderen (bootstrap map)
+- [x] sql user veranderen naar de juiste!!!
+- [x] nieuwe ERD maken
+- [x] htmlHead terug op online zetten
 
 ## Webuser account
 
@@ -22,11 +19,6 @@
 email    : webuser@zeverinpakskes.be
 password : Lab2021
 ```
-
-## oeps
-
-- je orders heeft geen enkel attribuut. Ik neem aan dat je op zijn minst een PK orderID of zoiets toevoegt.
-- nu kan je in een order een bepaald product maar 1 keer plaatsen, wat als ik hetzelfde product meer dan 1 keer wil bestellen in 1 order? 
 
 ## Commands gebruikt voor SQL aan te make (ERD aanpassen)
 
