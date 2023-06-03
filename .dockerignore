@@ -1,0 +1,7 @@
+.env
+.nuxt
+.vscode
+.npm
+
+mysqldata
+node_modules

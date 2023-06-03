@@ -55,23 +55,23 @@
                         <td><?php echo($row['registratieTijd']); ?></td>
                         <td>
                             <?php if($row['admin'] == 1){ ?>
-                                <form action="./includes/klantenForm.php" method="POST"> <!-- TODO ni vergete te checken of POST request van een admin komt (ni op deze pagina ma...) -->
+                                <form action="./includes/klantenForm.php" method="POST"> 
                                     <input type="hidden" name="actie" value="toggle">
                                     <input type="hidden" name="to" value="klant">
                                     <input type="hidden" name="klantID" value="<?php echo($row['klantID']); ?>">
                                     <button type="submit" class="btn btn-outline-info" <?php if ($row['klantID'] == $_SESSION['klantID']) echo('disabled') ?>>Maak gewone klant</button>
                                 </form>
                             <?php } else { ?>
-                                <form action="./includes/klantenForm.php" method="POST"> <!-- TODO ni vergete te checken of POST request van een admin komt (ni op deze pagina ma...) -->
+                                <form action="./includes/klantenForm.php" method="POST">
                                     <input type="hidden" name="actie" value="toggle">
                                     <input type="hidden" name="to" value="admin">
                                     <input type="hidden" name="klantID" value="<?php echo($row['klantID']); ?>">
                                     <button type="submit" class="btn btn-outline-success">Maak administrator</button>
                                 </form>
                             <?php } ?>
-                        </td> <!-- of verwijder admin als account al admin is -->
+                        </td>
                         <td>
-                            <form action="./includes/klantenForm.php" method="POST"> <!-- TODO ni vergete te checken of POST request van een admin komt (ni op deze pagina ma...) -->
+                            <form action="./includes/klantenForm.php" method="POST">
                                 <input type="hidden" name="actie" value="verwijder">
                                 <input type="hidden" name="klantID" value="<?php echo($row['klantID']); ?>">
                                 <button type="submit" class="btn btn-outline-<?php if ($row['admin'] == 1) echo('secondary'); else echo('danger'); ?>" <?php if ($row['admin'] == 1) echo('disabled') ?>>Verwijder account</button>
@@ -125,17 +125,17 @@
                         <td><?php echo($row['registratieTijd']); ?></td>
                         <td>
                             <?php if($row['admin'] == 1){ ?>
-                                <form action="./includes/klantenForm.php" method="POST"> <!-- TODO ni vergete te checken of POST request van een admin komt (ni op deze pagina ma...) -->
+                                <form action="./includes/klantenForm.php" method="POST"> 
                                     <button type="submit" class="btn btn-outline-info" disabled>Maak gewone klant</button>
                                 </form>
                             <?php } else { ?>
-                                <form action="./includes/klantenForm.php" method="POST"> <!-- TODO ni vergete te checken of POST request van een admin komt (ni op deze pagina ma...) -->
+                                <form action="./includes/klantenForm.php" method="POST"> 
                                     <button type="submit" class="btn btn-outline-success" disabled>Maak administrator</button>
                                 </form>
                             <?php } ?>
-                        </td> <!-- of verwijder admin als account al admin is -->
+                        </td> 
                         <td>
-                            <form action="./includes/klantenForm.php" method="POST"> <!-- TODO ni vergete te checken of POST request van een admin komt (ni op deze pagina ma...) -->
+                            <form action="./includes/klantenForm.php" method="POST"> 
                                 <input type="hidden" name="actie" value="terugzetten">
                                 <input type="hidden" name="klantID" value="<?php echo($row['klantID']); ?>">
                                 <button type="submit" class="btn btn-outline-<?php if ($row['admin'] == 1) echo('secondary'); else echo('danger'); ?>">Zet account terug</button>

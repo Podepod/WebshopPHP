@@ -37,7 +37,7 @@ function checkSignin(form){
     if (!(/^[0-9,a-z]+(.[0-9,a-z]+)+@[a-z]+\.[a-z][a-z][a-z]?$/.test(email))) juist = false;
 
     // check of passwoorden overeen komen
-    //if (password1.length < 2 || password2.length < 2 ||password1 != password2) juist = false;
+    if (password1.length < 2 || password2.length < 2 || password1 != password2) juist = false;
 
     // check of de straatnaam lang genoeg is
     if (straat.length < 2) juist = false;

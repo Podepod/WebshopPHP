@@ -84,7 +84,6 @@
                             $i++;
                         }
                     } else {
-                        //header('Location: ./index.php/?alert=Geen producten gevonden'); // TODO alert laten werken
                         echo("Geen producten gevonden.");
                     }    
 
@@ -149,7 +148,6 @@
                             $i++;
                         }
                     } else {
-                        //header('Location: ./index.php/?alert=Geen producten gevonden'); // TODO alert laten werken
                         echo("Geen producten gevonden.");
                     }    
 

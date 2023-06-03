@@ -104,8 +104,7 @@
                         }
                     } else {
                         echo("Geen bestellingen gevonden.");
-                    }    
-
+                    }
                 ?>
             </tbody>
         </table>

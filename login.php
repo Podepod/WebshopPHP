@@ -17,12 +17,12 @@
     ?>
     <div class="container p-4">
         <?php include("./includes/alert.php"); ?>
-        <form class="card mx-auto loginForm" action="./includes/login.php" method="POST"> <!-- TODO id's en names van inputs veranderen -->
+        <form class="card mx-auto loginForm" action="./includes/login.php" method="POST">
             <div class="card-header">
                 <h4>Login</h4>
             </div>
             <div class="card-body">
-                <div class="form-floating mb-3"> <!-- TODO als email niet bestaat class+= "is-invalid" -->
+                <div class="form-floating mb-3">
                     <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
                     <label for="email">E-mail adres</label>
                 </div>

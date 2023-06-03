@@ -57,7 +57,6 @@
                         </div>
                         <div class="col-2">
                             <label for="aantal<?php echo($winkelmandjeNr); ?>">Aantal pakskes zever: </label>
-                            <!-- TODO max = stock van dat item -->
                             <input 
                                 class="form-control b-5 aantalItems" 
                                 type="number" 
@@ -70,7 +69,6 @@
                                 data-bs-textField="prijs<?php echo($winkelmandjeNr); ?>"
                             >
                         
-                            <!-- TODO knop onderaan row zetten -->
                             <form action="./includes/remove_winkelmandje.php" method="POST">
                                 <input type="hidden" name="productID" value="<?php echo($product['id']); ?>">
                                 <button type="submit" name="winkelmand-item-verwijderen" class="btn btn-outline-danger mt-2">Verwijder</button>
@@ -96,7 +94,6 @@
                 <div class="row">
                     <div class="col-8"></div>
                     <div class="col-2">
-                        <!-- TODO vullen met juiste getallen (deels php, deels js) -->
                         <p class="mb-0">Totaal artikelen <span class="badge bg-secondary" id="totaalAantal">4</span></p>
                     </div>
                     <div class="col-2">
