@@ -1,5 +1,5 @@
 <?php
-    $servername = "localhost";
+    $servername = "zever_db";
     $username = "Lode";
     $password = "sowpFK8hg7Dh8iVF7LTG";
     $database = "ZeverInPakskesDB";
