@@ -1,8 +1,8 @@
 <?php
     $servername = "zever_db";
-    $username = "Lode";
-    $password = "sowpFK8hg7Dh8iVF7LTG";
-    $database = "ZeverInPakskesDB";
+    $username = "root";
+    $password = "XzeX63xiFFtRWWYG6B4T";
+    $database = "zeverinpakskesdb";
 
     $conn = mysqli_connect($servername, $username, $password, $database);
 
